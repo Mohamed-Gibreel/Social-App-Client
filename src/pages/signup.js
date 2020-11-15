@@ -1,14 +1,16 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import appicon from "../images/appicon.svg";
-import axios from "axios";
 
 //MUI Stuff
 import withStyles from "@material-ui/core/styles/withStyles";
 import Typography from "@material-ui/core/Typography";
 import { CircularProgress, TextField } from "@material-ui/core";
 import Button from "@material-ui/core/Button";
-import CiruclarProgress from "@material-ui/core/CircularProgress";
+
+//Redux Stuff
+import { connect } from "react-redux";
+import { signupUser } from "../redux/actions/userActions";
 
 const Link = require("react-router-dom").Link;
 
@@ -24,9 +26,14 @@ class signup extends Component {
       password: "",
       confirmPassword: "",
       handle: "",
-      loading: false,
       errors: {},
     };
+  }
+  static getDerivedStateFromProps(props) {
+    if (props.UI.errors) {
+      const errors = props.UI.errors;
+      return { errors };
+    }
   }
   handleSubmit = (event) => {
     event.preventDefault();
@@ -40,23 +47,7 @@ class signup extends Component {
       handle: this.state.handle,
     };
 
-    axios
-      .post("/signup", newUserData)
-      .then((res) => {
-        localStorage.setItem("FBIdToken", `Bearer ${res.data.token}`);
-        this.setState({
-          loading: false,
-        });
-        this.props.history.push("/"); // redirect to home page
-      })
-      .catch((err) => {
-        this.setState({
-          errors: err.response.data.errors
-            ? err.response.data.errors
-            : err.response.data,
-          loading: false,
-        });
-      });
+    this.props.signupUser(newUserData, this.props.history);
   };
 
   handleChange = (event) => {
@@ -64,8 +55,11 @@ class signup extends Component {
   };
 
   render() {
-    const { classes } = this.props;
-    const { loading, errors } = this.state;
+    const {
+      classes,
+      UI: { loading },
+    } = this.props;
+    const { errors } = this.state;
     return (
       <div className={classes.formContainer}>
         <img src={appicon} alt="AppIcon" className={classes.appIcon} />
@@ -153,7 +147,21 @@ class signup extends Component {
 }
 
 signup.propTypes = {
+  signupUser: PropTypes.func.isRequired,
   classes: PropTypes.object.isRequired,
+  user: PropTypes.object.isRequired,
+  UI: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(signup);
+const mapStateToProps = (state) => ({
+  user: state.user,
+  UI: state.UI,
+});
+
+// const mapActionsToProps = {
+//   signupUser,
+// };
+
+export default connect(mapStateToProps, { signupUser })(
+  withStyles(styles)(signup)
+);

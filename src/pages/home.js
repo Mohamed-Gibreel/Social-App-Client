@@ -3,6 +3,7 @@ import axios from "axios";
 import Grid from "@material-ui/core/Grid";
 
 import Post from "../components/Post";
+import Profile from "../components/Profile";
 
 class Home extends Component {
   state = {
@@ -18,7 +19,7 @@ class Home extends Component {
         });
       })
       .catch((err) => {
-        console.error(err);
+        console.log(err);
       });
   }
 
@@ -36,7 +37,7 @@ class Home extends Component {
           {recentPostsMarkup}
         </Grid>
         <Grid item sm={4} xs={12}>
-          <p>Profile...</p>
+          <Profile></Profile>
         </Grid>
       </Grid>
     );

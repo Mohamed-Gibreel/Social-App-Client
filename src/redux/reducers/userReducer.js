@@ -1,14 +1,13 @@
 import {
   SET_USER,
-  SET_ERROS,
-  CLEAR_ERRORS,
-  LOADING_UI,
   SET_AUTHENTICATED,
   SET_UNAUTHENTICATED,
+  LOADING_USER,
 } from "../types";
 
 const initialState = {
   authenticated: false,
+  loading: false,
   credentials: {},
   likes: [],
   notifications: [],
@@ -25,8 +24,14 @@ export default function (state = initialState, action) {
       return initialState;
     case SET_USER:
       return {
+        ...action.payload, //will bind the intialState to the values that we get from the API.
         authenticated: true,
-        ...action.payload, //will bind all the intialState to their values that we get from the API.
+        loading: false,
+      };
+    case LOADING_USER:
+      return {
+        ...state,
+        loading: true,
       };
     default:
       return state;
