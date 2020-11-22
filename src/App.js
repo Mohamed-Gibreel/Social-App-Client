@@ -12,14 +12,14 @@ import { SET_AUTHENTICATED } from "./redux/types";
 import { logoutUser, getUserData } from "./redux/actions/userActions";
 
 //Components
-import NavBar from "./components/Navbar";
+import NavBar from "./components/navbar";
 import AuthRoute from "./util/AuthRoute";
 import themeFile from "./util/theme";
 
 //Pages
-import home from "./pages/Home";
-import login from "./pages/Login";
-import signup from "./pages/Signup";
+import home from "./pages/home";
+import login from "./pages/login";
+import signup from "./pages/signup";
 import axios from "axios";
 
 const theme = createMuiTheme(themeFile);
