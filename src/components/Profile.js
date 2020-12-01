@@ -1,6 +1,7 @@
 import React, { Component, Fragment } from "react";
 import PropTypes from "prop-types";
 import dayjs from "dayjs";
+import EditDetails from "./EditDetails";
 
 //Redux Stuff
 import { connect } from "react-redux";
@@ -19,7 +20,8 @@ import ToolTip from "@material-ui/core/Tooltip";
 import LocationOn from "@material-ui/icons/LocationOn";
 import LinkIcon from "@material-ui/icons/Link";
 import CalendarToday from "@material-ui/icons/CalendarToday";
-import EditIcon from "@material-ui/icons/Edit";
+import PhotoCameraIcon from "@material-ui/icons/PhotoCamera";
+import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 
 const Link = require("react-router-dom").Link;
 
@@ -37,6 +39,9 @@ const styles = (theme) => ({
         left: "70%",
       },
     },
+    "& .textInfo": {
+      color: "red",
+    },
     "& .profile-image": {
       width: 200,
       height: 200,
@@ -52,6 +57,15 @@ const styles = (theme) => ({
       "& a": {
         color: "#00bcd4",
       },
+      "& .profileActions": {
+        display: "flex",
+        justifyContent: "space-between",
+        padding: "0 20px",
+      },
+    },
+    "& .buttons-profile": {
+      display: "flex",
+      justifyContent: "space-between",
     },
     "& hr": {
       border: "none",
@@ -84,6 +98,11 @@ class Profile extends Component {
     console.log(fileInput);
     fileInput.click();
   };
+
+  handleLogoutUser = () => {
+    this.props.logoutUser();
+  };
+
   render() {
     const {
       classes,
@@ -93,6 +112,7 @@ class Profile extends Component {
         authenticated,
       },
     } = this.props;
+
     let profileMarkup = !loading ? (
       authenticated ? (
         <Paper className={classes.paper}>
@@ -108,7 +128,7 @@ class Profile extends Component {
               />
               <ToolTip title="Edit Profile Image">
                 <IconButton onClick={this.handleEditPicture} className="button">
-                  <EditIcon color="primary" />
+                  <PhotoCameraIcon color="primary" />
                 </IconButton>
               </ToolTip>
             </div>
@@ -156,7 +176,17 @@ class Profile extends Component {
               <CalendarToday color="primary" />{" "}
               <span>Joined {dayjs(createdAt).format("MMM YYYY")}</span>
               <hr />
-              <hr />
+              <div className="profileActions">
+                <EditDetails />
+                <ToolTip title="Logout User">
+                  <IconButton
+                    onClick={this.handleLogoutUser}
+                    className={classes.buttons}
+                  >
+                    <ExitToAppIcon color="primary" />
+                  </IconButton>
+                </ToolTip>
+              </div>
             </div>
           </div>
         </Paper>

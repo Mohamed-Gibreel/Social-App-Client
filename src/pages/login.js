@@ -114,28 +114,6 @@ class login extends Component {
             </small>
           </div>
         </form>
-        {/* <div className={classes.footerContainer}>
-          <div className={classes.footer}>
-            Icons made by{" "}
-            <a
-              target="_blank"
-              href="https://www.flaticon.com/authors/freepik"
-              title="Freepik"
-              rel="noopener noreferrer"
-            >
-              Freepik
-            </a>{" "}
-            from{" "}
-            <a
-              target="_blank"
-              href="https://www.flaticon.com/"
-              title="Flaticon"
-              rel="noopener noreferrer"
-            >
-              www.flaticon.com
-            </a>
-          </div>
-        </div> */}
       </div>
     );
   }
