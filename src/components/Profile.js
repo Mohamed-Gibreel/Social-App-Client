@@ -2,6 +2,7 @@ import React, { Component, Fragment } from "react";
 import PropTypes from "prop-types";
 import dayjs from "dayjs";
 import EditDetails from "./EditDetails";
+import CustomIconButton from "../util/CustomIconButton";
 
 //Redux Stuff
 import { connect } from "react-redux";
@@ -13,8 +14,6 @@ import Paper from "@material-ui/core/Paper";
 import MuiLink from "@material-ui/core/Link";
 import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
-import IconButton from "@material-ui/core/IconButton";
-import ToolTip from "@material-ui/core/Tooltip";
 
 //Icons
 import LocationOn from "@material-ui/icons/LocationOn";
@@ -126,11 +125,12 @@ class Profile extends Component {
                 onChange={this.handleImageChange}
                 hidden="hidden"
               />
-              <ToolTip title="Edit Profile Image">
-                <IconButton onClick={this.handleEditPicture} className="button">
-                  <PhotoCameraIcon color="primary" />
-                </IconButton>
-              </ToolTip>
+              <CustomIconButton
+                title="Edit Profile Image"
+                onClick={this.handleEditPicture}
+              >
+                <PhotoCameraIcon color="primary" />
+              </CustomIconButton>
             </div>
             <hr />
             <div className="profile-details">
@@ -178,14 +178,12 @@ class Profile extends Component {
               <hr />
               <div className="profileActions">
                 <EditDetails />
-                <ToolTip title="Logout User">
-                  <IconButton
-                    onClick={this.handleLogoutUser}
-                    className={classes.buttons}
-                  >
-                    <ExitToAppIcon color="primary" />
-                  </IconButton>
-                </ToolTip>
+                <CustomIconButton
+                  title="Logout User"
+                  onClick={this.handleLogoutUser}
+                >
+                  <ExitToAppIcon color="primary" />
+                </CustomIconButton>
               </div>
             </div>
           </div>

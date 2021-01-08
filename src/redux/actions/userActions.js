@@ -36,6 +36,18 @@ export const getUserData = () => (dispatch) => {
     });
 };
 
+export const setUserData = (userData) => (dispatch) => {
+  dispatch({ type: LOADING_USER });
+  axios
+    .post("/user", userData)
+    .then(() => {
+      dispatch(getUserData());
+    })
+    .catch((err) => {
+      console.error(err);
+    });
+};
+
 export const logoutUser = () => (dispatch) => {
   localStorage.removeItem("FBIdToken");
   delete axios.defaults.headers.common["Authorization"];
