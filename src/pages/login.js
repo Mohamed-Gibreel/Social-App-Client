@@ -34,6 +34,7 @@ class login extends Component {
       const errors = props.UI.errors;
       return { errors };
     }
+    return null;
   }
 
   handleSubmit = (event) => {
@@ -109,7 +110,7 @@ class login extends Component {
             )}
           </Button>
           <div>
-            <small>
+            <small style={{ color: "#fff" }}>
               Don't have an account ? Sign Up <Link to="/signup">here</Link> !
             </small>
           </div>

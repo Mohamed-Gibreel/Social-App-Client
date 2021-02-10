@@ -12,7 +12,7 @@ import { SET_AUTHENTICATED } from "./redux/types";
 import { logoutUser, getUserData } from "./redux/actions/userActions";
 
 //Components
-import NavBar from "./components/navbar";
+import NavBar from "./components/Layout/navbar";
 import AuthRoute from "./util/AuthRoute";
 import themeFile from "./util/theme";
 
@@ -20,11 +20,16 @@ import themeFile from "./util/theme";
 import home from "./pages/home";
 import login from "./pages/login";
 import signup from "./pages/signup";
+import user from "./pages/user";
+
 import axios from "axios";
 
 const theme = createMuiTheme(themeFile);
 
 const token = localStorage.FBIdToken;
+
+axios.defaults.baseURL =
+  "https://europe-west1-socialapp-1439f.cloudfunctions.net/api";
 
 if (token) {
   const decodedToken = jwtDecode(token);
@@ -46,11 +51,12 @@ function App() {
           <NavBar />
           <div className="container">
             <Switch>
-              <Route exact path="/" component={home}>
-                {/* <Redirect to="/login"></Redirect> */}
-              </Route>
+              <Route exact path="/" component={home} />
+              {/* <Redirect to="/login"></Redirect> */}
               <AuthRoute exact path="/login" component={login} />
               <AuthRoute exact path="/signup" component={signup} />
+              <Route exact path="/user/:handle" component={user} />
+              <Route exact path="/user/:handle/post/:postId" component={user} />
             </Switch>
           </div>
         </Router>

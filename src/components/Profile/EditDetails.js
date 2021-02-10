@@ -1,10 +1,10 @@
 import React, { Component, Fragment } from "react";
-import CustomIconButton from "../util/CustomIconButton";
+import CustomIconButton from "../../util/CustomIconButton";
 import PropTypes from "prop-types";
 
 //Redux
 import { connect } from "react-redux";
-import { setUserData } from "../redux/actions/userActions";
+import { setUserData } from "../../redux/actions/userActions";
 
 //MUI
 import withStyles from "@material-ui/core/styles/withStyles";
